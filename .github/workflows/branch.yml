@@ -1,0 +1,19 @@
+name: Check PR Branch Name
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  check-pr-branch-name:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Check branch name
+        run: |
+          if [[ "${GITHUB_HEAD_REF}" != feat/* && "${GITHUB_HEAD_REF}" != hotfix/* && "${GITHUB_HEAD_REF}" != bugfix/* && "${GITHUB_HEAD_REF}" != release/* && "${GITHUB_HEAD_REF}" != chore/* ]]; then
+            echo "Branch name does not follow the allowed naming conventions (feat/..., hotfix/..., bugfix/..., release/..., chore/...)"
+            exit 1
+          fi
