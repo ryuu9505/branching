@@ -31,8 +31,8 @@ tasks.named('test') {
 }
 
 checkstyle {
-    toolVersion = '8.37' // 사용할 Checkstyle 버전을 지정합니다.
-    config = resources.text.fromFile('config/checkstyle/checkstyle.xml') // Checkstyle 설정 파일 경로를 지정합니다.
+    toolVersion = '8.37' // 사용할 Checkstyle 버전
+    config = resources.text.fromFile('config/checkstyle/checkstyle.xml') // Checkstyle 설정 파일 경로
 }
 
 tasks.withType(Checkstyle) {
@@ -44,8 +44,8 @@ tasks.withType(Checkstyle) {
 }
 
 pmd {
-    toolVersion = '6.31.0' // 사용할 PMD 버전을 지정합니다.
-    ruleSetFiles = files('config/pmd/ruleset.xml') // PMD 설정 파일 경로를 지정합니다.
+    toolVersion = '6.31.0' // 사용할 PMD 버전
+    ruleSetFiles = files('config/pmd/ruleset.xml') // PMD 설정 파일 경로
     ruleSets = [] // 기본 설정 비활성화
 }
 
