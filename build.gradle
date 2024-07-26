@@ -30,21 +30,18 @@ tasks.named('test') {
     useJUnitPlatform()
 }
 
-
 checkstyle {
-    toolVersion = '9.3'  // 사용할 Checkstyle 버전을 지정합니다.
-    configFile = rootProject.file('config/checkstyle/checkstyle.xml')
+    toolVersion = '8.37' // 사용할 Checkstyle 버전을 지정합니다.
+    config = resources.text.fromFile('config/checkstyle/checkstyle.xml') // Checkstyle 설정 파일 경로를 지정합니다.
 }
 
-tasks.withType(Checkstyle).configureEach {
+tasks.withType(Checkstyle) {
     reports {
-        xml.required = false
-        html.required = true
-        html.destination = file("${project.buildDir}/reports/checkstyle.html")
+        xml.required.set(false)
+        html.required.set(true)
+        html.outputLocation.set(file("${buildDir}/reports/checkstyle/checkstyle.html"))
     }
 }
-
-tasks.check.dependsOn tasks.checkstyleMain
 
 pmd {
     toolVersion = '6.31.0' // 사용할 PMD 버전을 지정합니다.
@@ -52,10 +49,10 @@ pmd {
     ruleSets = [] // 기본 설정 비활성화
 }
 
-tasks.withType(Pmd).configureEach {
+tasks.withType(Pmd) {
     reports {
-        xml.enabled = false
-        html.enabled = true
-        html.destination = file("${buildDir}/reports/pmd/pmd.html")
+        xml.required.set(false)
+        html.required.set(true)
+        html.outputLocation.set(file("${buildDir}/reports/pmd/pmd.html"))
     }
 }
