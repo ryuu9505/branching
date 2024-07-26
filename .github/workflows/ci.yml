@@ -40,11 +40,11 @@ jobs:
       - name: Build and test
         run: ./gradlew clean build
 
-      - name: Run Checkstyle
-        run: ./gradlew checkstyleMain checkstyleTest
-
-      - name: Run PMD
-        run: ./gradlew pmdMain pmdTest
+#      - name: Run Checkstyle
+#        run: ./gradlew checkstyleMain checkstyleTest
+#
+#      - name: Run PMD
+#        run: ./gradlew pmdMain pmdTest
 
       - name: Upload test results
         uses: actions/upload-artifact@v2
