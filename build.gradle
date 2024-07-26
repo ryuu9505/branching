@@ -23,15 +23,28 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    checkstyle 'com.puppycrawl.tools:checkstyle:10.9.2'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
 }
 
+
 checkstyle {
-    toolVersion = '8.36.1'
+    toolVersion = '9.3'  // 사용할 Checkstyle 버전을 지정합니다.
+    configFile = rootProject.file('config/checkstyle/checkstyle.xml')
 }
+
+tasks.withType(Checkstyle).configureEach {
+    reports {
+        xml.required = false
+        html.required = true
+        html.destination = file("${project.buildDir}/reports/checkstyle.html")
+    }
+}
+
+tasks.check.dependsOn tasks.checkstyleMain
 
 pmd {
     toolVersion = '6.21.0'
